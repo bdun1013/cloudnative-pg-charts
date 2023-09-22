@@ -515,3 +515,30 @@ monitoringQueriesConfigMap:
         - setting:
             usage: "GAUGE"
             description: "Setting value"
+
+# -- Network Policy.
+networkPolicy:
+  enabled: false
+  kubeDNS:
+    namespace: kube-system
+    labels:
+      k8s-app: kube-dns
+    port: 53
+  kubeAPIServer:
+    port: 6443
+    cidrs:
+    - 0.0.0.0/0
+  prometheus:
+    namespace: monitoring
+    labels:
+      app.kubernetes.io/name: prometheus
+  extraIngress: []
+  # extraIngress:
+  # - from:
+  #   - ipBlock:
+  #       cidr: 0.0.0.0/0
+  extraEgress: []
+  # extraEgress:
+  # - to:
+  #   - ipBlock:
+  #       cidr: 0.0.0.0/0
